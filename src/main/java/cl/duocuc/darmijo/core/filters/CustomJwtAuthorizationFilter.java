@@ -30,6 +30,9 @@ public class CustomJwtAuthorizationFilter extends OncePerRequestFilter {
     
     private void setAuthentication(Claims claims) {
         //List<String> authorities = (List<String>) claims.get("authorities");
+        // no se que hace esto realmente, pero parece que setea la autenticacion en el contexto de seguridad
+        // al parecer el contexto se propaga a lo largo de la solicitud
+        // y deberia poder obtenerse en los controladores (?)
         UsernamePasswordAuthenticationToken auth =
             new UsernamePasswordAuthenticationToken(
                 claims.getSubject(),
@@ -66,14 +69,19 @@ public class CustomJwtAuthorizationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
+            // obtengo el token no verificado, podria ser un string vacio o nulo
             Optional<String> optionalUnverifiedToken = getToken(request);
             if(optionalUnverifiedToken.isEmpty()) {
                 throw new MalformedJwtException("Invalid JWT token");
             }
+            // si el token no esta vacio al menos podria no estar verificado
             String unverifiedToken = optionalUnverifiedToken.get();
+            //verifico el token y obtengo los claims
             Claims claims = jwtService.verifyAndGetClaims(unverifiedToken);
             log.info("Valid token found!");
+            // seteo la autenticacion en el contexto de seguridad (invetigar mas sobre esto)
             setAuthentication(claims);
+            // continuo con la cadena de filtros
             filterChain.doFilter(request, response);
             
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
@@ -81,7 +89,6 @@ public class CustomJwtAuthorizationFilter extends OncePerRequestFilter {
             SecurityContextHolder.clearContext();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
-            return;
         }
     }
 
