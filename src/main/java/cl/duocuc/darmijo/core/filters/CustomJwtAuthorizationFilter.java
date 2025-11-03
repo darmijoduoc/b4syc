@@ -54,12 +54,13 @@ public class CustomJwtAuthorizationFilter extends OncePerRequestFilter {
         return Optional.of(unverifiedToken);
     }
     
-    
+     //por aqui pasan todas las solicitudes, si todas
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         
         log.info("CustomJwtAuthorizationFilter doFilter {}", request.getRequestURI());
         try {
+            //aqui se saltan las rutas de acceso publico, access/auth, access/register, acess/refresh, etc
             if(request.getRequestURI().startsWith("/access/")) {
                 log.info("Skipping JWT check for /access/ endpoint");
                 filterChain.doFilter(request, response);
