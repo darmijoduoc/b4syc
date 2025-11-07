@@ -10,12 +10,22 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JwtService {
     
     @Value("${jwt.secret}")
     private String SUPER_SECRET_KEY;
+    
+    private List<String> duneCities = List.of(
+        "Arrakis",
+        "Caladan",
+        "Giedi Prime",
+        "Kaitain",
+        "Salusa Secundus"
+    );
+    
     
     private static final long TOKEN_LIFETIME = 24 * 60 * 60 * 1000;
     
@@ -34,15 +44,16 @@ public class JwtService {
     }
     
     public String createWithSubject(String email) {
-        String token = Jwts.builder()
+        return Jwts.builder()
             .claims()
             .subject(email)
             .issuedAt(new Date(System.currentTimeMillis()))
             .expiration(new Date(System.currentTimeMillis() + TOKEN_LIFETIME))
+            .add("city", duneCities.get((int)(Math.random() * duneCities.size())))
             .and()
             .signWith(getSigningKey())
             .compact();
-        
-        return "Bearer " + token;
     }
+    
+
 }

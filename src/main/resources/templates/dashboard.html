@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100">
+<div class="content-fluid" style="min-height: 100vh">
+    <div class="container mx-auto px-4 py-4">
+        <div class="breadcrumbs text-sm">
+            <ul>
+                <li>
+                    <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#">
+                        Grupo 4
+                    </a>
+                </li>
+
+                <li>
+                    Welcome
+                </li>
+
+
+            </ul>
+
+        </div>
+        <div class="flex justify-center">
+            <div class="card bg-base-100 w-96 shadow-sm">
+                <div class="card-body p-5">
+                    <h3 class="card-title text-center mb-4" th:text="'Welcome to ' + ${city}"></h3>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
