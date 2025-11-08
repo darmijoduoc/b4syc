@@ -5,21 +5,63 @@ import com.github.f4b6a3.ulid.Ulid;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
-@Entity
-@Table(name = "exp1_recipe")
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recipe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    @Column(unique = true)
-    public String ulid;
-    public String name;
+    private final String title;
+    private final String description;
+    private final List<Ingredient> ingredients;
+    private final List<String> steps;
+    private final List<Image> images;
     
-    @JsonIgnore
-    public String hashedPassword;
-    
-    public long createdAt() {
-        return Ulid.from(ulid).getTime();
+    public Recipe(String title, String description, List<Ingredient> ingredients, List<String> steps, List<Image> images) {
+        this.title = title;
+        this.description = description;
+        this.ingredients = ingredients;
+        this.steps = steps;
+        this.images = images;
     }
+    
+    public Recipe(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.ingredients = new ArrayList<>();
+        this.steps = new ArrayList<>();;
+        this.images = new ArrayList<>();;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+    
+    public List<String> getSteps() {
+        return steps;
+    }
+    
+    public List<Image> getImages() {
+        return images;
+    }
+    
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+    
+    public void addStep(String step) {
+        this.steps.add(step);
+    }
+    
+    public void addImage(Image image) {
+        this.images.add(image);
+    }
+    
+    
 }

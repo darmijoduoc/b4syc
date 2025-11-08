@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -24,16 +25,13 @@
             </ul>
 
         </div>
-        <div class="flex justify-center">
-            <div class="card bg-base-100 w-96 shadow-sm">
-                <div class="card-body p-5">
-                    <h3 class="card-title text-center mb-4" th:text="'Welcome to ' + ${city}"></h3>
-
-
-
-
-
-
+        <div class="flex justify-center gap-4">
+            <div class="card card-sm bg-base-200 max-w-60 shadow" th:each="recipe : ${recipes}">
+                <figure>
+                    <img th:src="@{${recipe.images[0].url}}" th:alt="${recipe.images[0].description}"/>
+                </figure>
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4" th:text="${recipe.title}"></h3>
                 </div>
             </div>
         </div>

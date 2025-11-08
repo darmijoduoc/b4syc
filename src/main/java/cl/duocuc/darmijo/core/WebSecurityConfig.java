@@ -12,17 +12,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
-@EnableWebSecurity()
+@EnableWebSecurity
 @Configuration
 @EnableWebMvc
 @ComponentScan
 public class WebSecurityConfig implements ApplicationContextAware, WebMvcConfigurer {
     
     private ApplicationContext applicationContext;
-    
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+            .addResourceHandler("/images/**")
+            .addResourceLocations("classpath:/static/images/");
+    }
     
     
     
@@ -41,6 +47,9 @@ public class WebSecurityConfig implements ApplicationContextAware, WebMvcConfigu
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
         return http
             .csrf(AbstractHttpConfigurer::disable)
+            /*.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/**").permitAll() // Allow static resources
+            )*/
             /*.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/access/**").permitAll()
                 .anyRequest().authenticated())
