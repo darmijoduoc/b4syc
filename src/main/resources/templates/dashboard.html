@@ -1,46 +1,70 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8" />
+  <title>Recetario Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<script th:inline="javascript">
 
-</script>
-<body class="bg-gray-100">
-<div class="content-fluid" style="min-height: 100vh">
-    <div class="container mx-auto px-4 py-4">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-        <div class="breadcrumbs text-sm">
-            <ul>
-                <li>
-                    <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#">
-                        Grupo 4
-                    </a>
-                </li>
-            </ul>
 
-        </div>
-        <a class="btn btn-success my-4" th:href="@{/login}">Log In</a>
-        <div class="flex justify-center my-4">
-        <input type="text" placeholder="Buscar receta..." class="input input-bordered"/>
-        </div>
-        <div class="flex justify-center gap-4">
-            <div class="card card-sm bg-base-200 max-w-60 shadow" th:each="recipe : ${recipes}">
-                <figure>
-                    <img th:src="@{${recipe.images[0].url}}" th:alt="${recipe.images[0].description}"/>
-                </figure>
-                <div class="card-body">
-                    <h3 class="card-title text-center mb-4" th:text="${recipe.title}"></h3>
-                </div>
+<nav class="navbar shadow-md px-6 text-white" style="background-color:#10935a;">
+    <div class="flex-1">
+      <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#">  Grupo 4 </a>
+    </div>
+    <div class="flex-none gap-2">
+      <a class="btn btn-success text-white" th:href="@{/login}">Iniciar sesion</a>
+    </div>
+</nav>
+<main class="flex-1">
+    <div class="container mx-auto px-4 py-6">
+      <div class="mt-4 flex justify-center">
+        <input
+          type="text"
+          placeholder="Buscar receta..."
+          class="input input-bordered w-full sm:w-1/2"
+          name="q"
+          id="q"/>
+    </div>
+    <h2 class="text-center font-extrabold mb-14 tracking-wide" style=" margin-top: 4rem ;font-size: 2rem; color: #414141 ;">Recetas disponibles</h2>
 
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
+          <div class="card bg-base-100 w-72 shadow" th:each="recipe : ${recipes}">
+            <figure class="aspect-[4/3] overflow-hidden">
+              <img class="w-full h-full object-cover"
+                   th:src="@{${recipe.images[0].url}}"
+                   th:alt="${recipe.images[0].description}" />
+            </figure>
+            <div class="card-body p-4">
+              <h3 class="card-title text-base justify-center text-center" th:text="${recipe.title}">Título</h3>
             </div>
+          </div>
         </div>
     </div>
-</div>
-  <footer class="text-center py-4 mt-auto text-white" style="background-color:#2e463b;">
+  </main>
+
+
+<footer class="text-center py-4 mt-auto text-white" style="background-color:#2e463b;">
     <p class="text-sm">© 2025 Grupo 4</p>
-  </footer>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("q");
+    const cards = document.querySelectorAll(".card");
+
+    input.addEventListener("input", () => {
+      const term = input.value.toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector(".card-title").textContent.toLowerCase();
+        card.style.display = title.includes(term) ? "block" : "none";
+      });
+    });
+  });
+  </script>
 </body>
+</html>
+
