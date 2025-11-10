@@ -80,7 +80,7 @@ public class RecipeService {
                 "Extiende la masa para pizza sobre una superficie enharinada al grosor deseado.",
                 "Unta la salsa de tomate de manera uniforme sobre la masa.",
                 "Desmenuza la mozzarella y distribúyela sobre la salsa.",
-                "Hornea durante 10-12 minutos, hasta que la masa esté dorada y el queso burbujeante.",
+                "Hornea durante 10-15 minutos, hasta que la masa esté dorada y el queso burbujeante.",
                 "Saca del horno y añade las hojas de albahaca y un chorrito de aceite de oliva antes de servir."
             ), List.of(
                 new Image("/images/pizza_margherita_01.png", "Una pizza Margarita recién horneada."),

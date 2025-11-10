@@ -5,56 +5,61 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/styles.css">
+ 
     
 </head>
 <body class="bg-gray-100">
 <div class="content-fluid" style="min-height: 100vh">
     <div class="container mx-auto px-4 py-4">
-        <div class="breadcrumbs text-sm">
-            <ul>
-                <li>
-                    <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#">
-                        Grupo 4
-                    </a>
-                </li>
 
-                <li th:text="${recipe.title}">
-                </li>
-            </ul>
-        </div>
+    <nav class="navbar shadow-md px-6 text-white" style="background-color:#10935a;">
+    <div class="flex justify-between items-center w-full">
+      <div class="breadcrumbs text-sm">
+        <ul>
+          <li>
+            <a class="text-white hover:underline" href="${pageContext.request.contextPath}/#">Grupo 4</a>
+          </li>
+          <li th:text="${recipe.title}"></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <main class="flex-grow container mx-auto px-4 py-10">
         <div class="card bg-base-100 shadow-xl max-w-3xl mx-auto">
         <div class="carousel rounded-box h-64">
             <div class="carousel-item" th:each="image : ${recipe.images}">
                 <img th:src="@{${image.url}}" th:alt="${image.description}"/>
             </div>
         </div>
-       <div></div> 
+    
        <div class="card-body pt-0">
-        <h1 class="card-title text-2xl font-bold" th:text="${recipe.title}"></h1>
+        <h1 class="text-2xl font-bold text-gray-800" th:text="${recipe.title}"></h1>
         <p class="text-gray-600" th:text="${recipe.description}"></p>
 
-      
-        <h2 class="section-title mt-6">Ingredientes</h2>
-        <ul class="ingredients-list">
-          <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+        <h2 class="font-bold text-lg text-gray-700 mt-6">Ingredientes</h2>
+        <ul class="divide-y divide-[color:#7a2f25]">
+          <li class="py-2" th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
         </ul>
 
-      
-        <h2 class="section-title mt-8">Preparación</h2>
-        <ol class="steps-list">
-          <li th:each="step : ${recipe.steps}" th:text="${step}"></li>
+       
+        <h2 class="font-bold text-lg text-gray-700 mt-8">Preparación</h2>
+        <ol class="list-none pl-0 mt-2">
+          <li class="relative pl-9 my-2"
+              th:each="step,iter : ${recipe.steps}">
+            <span class="absolute left-0 top-0 font-bold text-teal-700" th:text="${iter.index + 1} + '.'"></span>
+            <span th:text="${step}"></span>
+          </li>
         </ol>
 
         <div class="card-actions justify-end mt-6">
-          <a class="btn btn-sm btn-success" th:href="@{/recipes}">Volver a Recetas</a>
+          <a class="btn btn-sm border-none text-white" style="background-color:#0ac472;" th:href="@{/recipes}">
+            Volver a Recetas
+          </a>
         </div>
-      </div>
     </div>
-
-
-
-
     </div>
 </div>
+  <footer class="text-center py-4 mt-auto text-white" style="background-color:#2e463b;">
+    <p class="text-sm">© 2025 Grupo 4</p>
+  </footer>
 </body>

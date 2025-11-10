@@ -4,41 +4,42 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="bg-gray-100">
+<body class="min-h-screen flex flex-col justify-between"
+      style="
+        background-image: url('https://content.elmueble.com/medio/2024/01/10/cocina-de-madera-con-mueble-de-almacenaje-e-isla-central_da95a90a_00574902_240110143708_2000x1333.jpg');
+        background-size: cover;">
+
 <div class="content-fluid" style="min-height: 100vh">
     <div class="container mx-auto px-4 py-4">
-        <div class="breadcrumbs text-sm">
+
+          <nav class="navbar shadow-md px-6 text-white" style="background-color:#adadad;">
+    <div class="flex justify-between items-center w-full">
+     <div class="breadcrumbs text-sm">
             <ul>
                 <li>
-                    <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#">
-                        Grupo 4
-                    </a>
-                </li>
-
-                <li>
-                    Login
-                </li>
-
-
+                <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#"> Grupo 4</a></li>
+                <li>  Login </li>
             </ul>
-
         </div>
-        <div class="flex justify-center">
-            <div class="card bg-base-100 w-96 shadow-sm">
-                <div class="card-body p-5">
-                    <h3 class="card-title text-center mb-4">Iniciar sesión</h3>
+    </div>
+  </nav>  
+    <div class="flex justify-center" style="margin-top: 8rem;">
+        <div class="card bg-base-100 w-96 shadow-sm">
+             <div class="card-body p-5">
+                <h3 class="card-title text-center mb-4">Iniciar sesión</h3>
 
-                    <div th:if="${param.error}" class="alert alert-danger">
+                 <div th:if="${param.error}" class="alert alert-danger">
                         Credenciales incorrectas. Por favor, inténtalo de nuevo.
-                    </div>
-                    <div th:if="${param.no_session}" class="alert alert-danger">
+                </div>
+                 <div th:if="${param.no_session}" class="alert alert-danger">
                         Debe ingresar con las credenciales correctas para acceder a la página solicitada.
-                    </div>
+                 </div>
 
-                    <div th:if="${param.logout}" class="alert alert-success">
+                <div th:if="${param.logout}" class="alert alert-success">
                         Has cerrado sesión correctamente.
-                    </div>
+                 </div>
 
                     <form th:action="@{/login}" method="post">
                         <fieldset class="fieldset">
@@ -62,4 +63,8 @@
         </div>
     </div>
 </div>
+
+  <footer class="text-center py-4 mt-auto text-white" style="background-color:#2e463b;">
+    <p class="text-sm">© 2025 Grupo 4</p>
+  </footer>
 </body>
