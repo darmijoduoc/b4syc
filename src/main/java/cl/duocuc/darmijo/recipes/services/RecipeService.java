@@ -19,71 +19,73 @@ public class RecipeService {
     public RecipeService() {
         
         this.recipes = List.of(
-            new Recipe("Spaghetti Bolognese", "A classic Italian pasta dish with rich meat sauce.", List.of(
-                new Ingredient("Spaghetti", 200, "grams"),
-                new Ingredient("Ground Beef", 300, "grams"),
-                new Ingredient("Tomato Sauce", 400, "ml"),
-                new Ingredient("Onion", 1, "medium"),
-                new Ingredient("Garlic", 2, "cloves"),
-                new Ingredient("Olive Oil", 2, "tablespoons"),
-                new Ingredient("Salt", 1, "teaspoon"),
-                new Ingredient("Black Pepper", 0.5, "teaspoon"),
-                new Ingredient("Parmesan Cheese", 50, "grams")
+            new Recipe("Espaguetis a la Boloñesa", "Un clásico plato de pasta italiana con una rica salsa de carne.", List.of(
+                new Ingredient("Espaguetis", 200, "gramos"),
+                new Ingredient("Carne molida", 300, "gramos"),
+                new Ingredient("Salsa de tomate", 400, "ml"),
+                new Ingredient("Cebolla", 1, "mediana"),
+                new Ingredient("Ajo", 2, "dientes"),
+                new Ingredient("Aceite de oliva", 2, "cucharadas"),
+                new Ingredient("Sal", 1, "cucharadita"),
+                new Ingredient("Pimienta negra", 0.5, "cucharadita"),
+                new Ingredient("Queso parmesano", 50, "gramos")
             ), List.of(
-                "Cook spaghetti according to package instructions until al dente. Drain and set aside.",
-                "In a large skillet, heat olive oil over medium heat. Add chopped onion and minced garlic, sauté until translucent.",
-                "Add ground beef to the skillet. Cook until browned, breaking it apart with a spoon.",
-                "Pour in tomato sauce. Season with salt and black pepper. Simmer for 15-20 minutes.",
-                "Serve sauce over cooked spaghetti. Garnish with grated Parmesan cheese."
+                "Cocina los espaguetis según las instrucciones del paquete hasta que estén al dente. Escurre y reserva.",
+                "En una sartén grande, calienta el aceite de oliva a fuego medio. Agrega la cebolla picada y el ajo triturado, sofríe hasta que estén transparentes.",
+                "Agrega la carne molida a la sartén y cocina hasta que esté dorada, desmenuzándola con una cuchara.",
+                "Vierte la salsa de tomate. Sazona con sal y pimienta negra. Cocina a fuego lento durante 15-20 minutos.",
+                "Sirve la salsa sobre los espaguetis cocidos. Decora con queso parmesano rallado."
             ), List.of(
-                new Image("/images/spaghetti_01.png", "A plate of delicious Spaghetti Bolognese."),
-                new Image("/images/spaghetti_02.png", "Ingredients for Spaghetti Bolognese."),
-                new Image("/images/spaghetti_03.png", "Cooking Spaghetti Bolognese in a pan."),
-                new Image("/images/spaghetti_04.png", "Final presentation of Spaghetti Bolognese."),
-                new Image("/images/spaghetti_05.png", "Close-up of Spaghetti Bolognese with Parmesan cheese.")
+                new Image("/images/spaghetti_01.png", "Un plato de deliciosos espaguetis a la boloñesa."),
+                new Image("/images/spaghetti_02.png", "Ingredientes para preparar espaguetis a la boloñesa."),
+                new Image("/images/spaghetti_03.png", "Cocinando espaguetis a la boloñesa en una sartén."),
+                new Image("/images/spaghetti_04.png", "Presentación final de los espaguetis a la boloñesa."),
+                new Image("/images/spaghetti_05.png", "Primer plano de los espaguetis a la boloñesa con queso parmesano.")
             )),
-            new Recipe("Chicken Curry", "A flavorful chicken curry with aromatic spices.", List.of(
-                new Ingredient("Chicken", 500, "grams"),
-                new Ingredient("Coconut Milk", 400, "ml"),
-                new Ingredient("Curry Powder", 2, "tablespoons"),
-                new Ingredient("Onion", 1, "medium"),
-                new Ingredient("Garlic", 3, "cloves"),
-                new Ingredient("Ginger", 1, "inch piece"),
-                new Ingredient("Vegetable Oil", 2, "tablespoons"),
-                new Ingredient("Salt", 1, "teaspoon"),
-                new Ingredient("Cilantro", 10, "grams")
+            
+            new Recipe("Pollo al Curry", "Un sabroso curry de pollo con especias aromáticas.", List.of(
+                new Ingredient("Pollo", 500, "gramos"),
+                new Ingredient("Leche de coco", 400, "ml"),
+                new Ingredient("Polvo de curry", 2, "cucharadas"),
+                new Ingredient("Cebolla", 1, "mediana"),
+                new Ingredient("Ajo", 3, "dientes"),
+                new Ingredient("Jengibre", 1, "trozo de 2 cm"),
+                new Ingredient("Aceite vegetal", 2, "cucharadas"),
+                new Ingredient("Sal", 1, "cucharadita"),
+                new Ingredient("Cilantro fresco", 10, "gramos")
             ), List.of(
-                "Heat vegetable oil in a large pot over medium heat. Add chopped onion, minced garlic, and grated ginger. Sauté until fragrant.",
-                "Add chicken pieces to the pot. Cook until browned on all sides.",
-                "Stir in curry powder and cook for another minute.",
-                "Pour in coconut milk and bring to a simmer. Season with salt.",
-                "Cover and cook for 20-25 minutes until chicken is cooked through.",
-                "Garnish with chopped cilantro before serving."
+                "Calienta el aceite vegetal en una olla grande a fuego medio. Agrega la cebolla picada, el ajo triturado y el jengibre rallado. Sofríe hasta que desprenda aroma.",
+                "Añade los trozos de pollo y cocina hasta que estén dorados por todos lados.",
+                "Incorpora el polvo de curry y cocina un minuto más.",
+                "Vierte la leche de coco y lleva a ebullición. Sazona con sal.",
+                "Tapa y cocina durante 20-25 minutos, hasta que el pollo esté bien cocido.",
+                "Decora con cilantro picado antes de servir."
             ), List.of(
-                new Image("/images/chicken_curry_01.png", "A bowl of delicious Chicken Curry."),
-                new Image("/images/chicken_curry_02.png", "Ingredients for Chicken Curry."),
-                new Image("/images/chicken_curry_03.png", "Cooking Chicken Curry in a pot."),
-                new Image("/images/chicken_curry_04.png", "Final presentation of Chicken Curry."),
-                new Image("/images/chicken_curry_05.png", "Close-up of Chicken Curry with rice.")
+                new Image("/images/chicken_curry_01.png", "Un plato de delicioso pollo al curry."),
+                new Image("/images/chicken_curry_02.png", "Ingredientes para el pollo al curry."),
+                new Image("/images/chicken_curry_03.png", "Cocinando pollo al curry en una olla."),
+                new Image("/images/chicken_curry_04.png", "Presentación final del pollo al curry."),
+                new Image("/images/chicken_curry_05.png", "Primer plano del pollo al curry con arroz.")
             )),
-            new Recipe("Pizza Margherita", "A simple and classic pizza topped with fresh tomatoes, mozzarella, and basil.", List.of(
-                new Ingredient("Pizza Dough", 1, "base"),
-                new Ingredient("Tomato Sauce", 150, "ml"),
-                new Ingredient("Fresh Mozzarella", 200, "grams"),
-                new Ingredient("Fresh Basil Leaves", 10, "grams"),
-                new Ingredient("Olive Oil", 2, "tablespoons"),
-                new Ingredient("Salt", 0.5, "teaspoon")
+            
+            new Recipe("Pizza Margarita", "Una pizza simple y clásica con tomates frescos, mozzarella y albahaca.", List.of(
+                new Ingredient("Masa para pizza", 1, "base"),
+                new Ingredient("Salsa de tomate", 150, "ml"),
+                new Ingredient("Mozzarella fresca", 200, "gramos"),
+                new Ingredient("Hojas de albahaca fresca", 10, "gramos"),
+                new Ingredient("Aceite de oliva", 2, "cucharadas"),
+                new Ingredient("Sal", 0.5, "cucharadita")
             ), List.of(
-                "Preheat oven to 475°F (245°C).",
-                "Roll out pizza dough on a floured surface to desired thickness.",
-                "Spread tomato sauce evenly over the dough.",
-                "Tear fresh mozzarella into pieces and distribute over the sauce.",
-                "Bake in preheated oven for 10-12 minutes until crust is golden and cheese is bubbly.",
-                "Remove from oven and top with fresh basil leaves and a drizzle of olive oil."
+                "Precalienta el horno a 245°C (475°F).",
+                "Extiende la masa para pizza sobre una superficie enharinada al grosor deseado.",
+                "Unta la salsa de tomate de manera uniforme sobre la masa.",
+                "Desmenuza la mozzarella y distribúyela sobre la salsa.",
+                "Hornea durante 10-12 minutos, hasta que la masa esté dorada y el queso burbujeante.",
+                "Saca del horno y añade las hojas de albahaca y un chorrito de aceite de oliva antes de servir."
             ), List.of(
-                new Image("/images/pizza_margherita_01.png", "A freshly baked Pizza Margherita."),
-                new Image("/images/pizza_margherita_02.png", "Ingredients for Pizza Margherita."),
-                new Image("/images/pizza_margherita_03.png", "Preparing Pizza Margherita.")
+                new Image("/images/pizza_margherita_01.png", "Una pizza Margarita recién horneada."),
+                new Image("/images/pizza_margherita_02.png", "Ingredientes para la pizza Margarita."),
+                new Image("/images/pizza_margherita_03.png", "Preparación de la pizza Margarita.")
             ))
         );
     }

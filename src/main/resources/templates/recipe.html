@@ -5,6 +5,8 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    
 </head>
 <body class="bg-gray-100">
 <div class="content-fluid" style="min-height: 100vh">
@@ -19,33 +21,38 @@
 
                 <li th:text="${recipe.title}">
                 </li>
-
-
             </ul>
-
         </div>
+        <div class="card bg-base-100 shadow-xl max-w-3xl mx-auto">
         <div class="carousel rounded-box h-64">
             <div class="carousel-item" th:each="image : ${recipe.images}">
                 <img th:src="@{${image.url}}" th:alt="${image.description}"/>
             </div>
         </div>
-        <diV class="card rounded-box h-64">
-            <div class="card-body">
-                <h2 class="card-title" th:text="${recipe.title}"></h2>
-                <p th:text="${recipe.description}"></p>
-                <h3>Ingredientes</h3>
-                <ul>
-                    <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
-                </ul>
-                <h3>Preparación</h3>
-                <ol>
-                    <li th:each="step : ${recipe.steps}" th:text="${step}"></li>
-                </ol>
-                <div class="card-actions justify-end">
-                    <a class="btn btn-primary" th:href="@{/recipes}">Volver a Recetas</a>
-                </div>
-            </div>
-        </diV>
+       <div></div> 
+       <div class="card-body pt-0">
+        <h1 class="card-title text-2xl font-bold" th:text="${recipe.title}"></h1>
+        <p class="text-gray-600" th:text="${recipe.description}"></p>
+
+      
+        <h2 class="section-title mt-6">Ingredientes</h2>
+        <ul class="ingredients-list">
+          <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+        </ul>
+
+      
+        <h2 class="section-title mt-8">Preparación</h2>
+        <ol class="steps-list">
+          <li th:each="step : ${recipe.steps}" th:text="${step}"></li>
+        </ol>
+
+        <div class="card-actions justify-end mt-6">
+          <a class="btn btn-sm btn-success" th:href="@{/recipes}">Volver a Recetas</a>
+        </div>
+      </div>
+    </div>
+
+
 
 
     </div>
