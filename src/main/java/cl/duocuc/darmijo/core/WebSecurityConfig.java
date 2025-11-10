@@ -43,7 +43,13 @@ public class WebSecurityConfig implements ApplicationContextAware, WebMvcConfigu
         return http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").permitAll())
+                .requestMatchers("/**").permitAll().anyRequest().authenticated())
+            /*.formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/recipes", true)
+                .permitAll()
+            )*/
             .formLogin(AbstractHttpConfigurer::disable)
             .logout(l -> l
                 .logoutUrl("/logout")
