@@ -44,9 +44,12 @@ public class AppController {
     
     @GetMapping("recipes")
     public ModelAndView getDashboard(
-        @CookieValue(name="Authorization") String token,
+        @CookieValue(name="Authorization", required = false) String token,
         Model model
     ) {
+        if(token == null) {
+            return new ModelAndView("redirect:/login?no_session");
+        }
         log.info("get dashboard {}", token);
         try {
             Claims claims = jwtService.verifyAndGetClaims(token);
@@ -59,7 +62,7 @@ public class AppController {
                 .addObject("user", user);
         } catch (Exception e) {
             //return accessController.logout();
-            return new ModelAndView("recipes.html");
+            return new ModelAndView("redirect:/login");
         }
         
         

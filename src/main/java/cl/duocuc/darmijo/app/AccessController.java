@@ -51,7 +51,7 @@ public class AccessController {
     }
     
     @GetMapping("/logout")
-    public String logout(
+    public ModelAndView logout(
         HttpServletResponse response
     ) {
         log.info("Logging out");
@@ -60,6 +60,6 @@ public class AccessController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return "dashboard.html";
+        return new ModelAndView("redirect:/");
     }
 }
