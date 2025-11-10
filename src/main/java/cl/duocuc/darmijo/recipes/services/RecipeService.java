@@ -59,7 +59,7 @@ public class RecipeService {
                 "Incorpora el polvo de curry y cocina un minuto más.",
                 "Vierte la leche de coco y lleva a ebullición. Sazona con sal.",
                 "Tapa y cocina durante 20-25 minutos, hasta que el pollo esté bien cocido.",
-                "Decora con cilantro picado antes de servir."
+                "Decorar con cilantro picado antes de servir."
             ), List.of(
                 new Image("/images/chicken_curry_01.png", "Un plato de delicioso pollo al curry."),
                 new Image("/images/chicken_curry_02.png", "Ingredientes para el pollo al curry."),
