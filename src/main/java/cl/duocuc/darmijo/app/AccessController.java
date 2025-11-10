@@ -24,17 +24,11 @@ public class AccessController {
     private JwtService jwtService;
     
     
-    @GetMapping("/")
-    public ModelAndView home() {
+    @GetMapping("/login")
+    public ModelAndView login(Model model) {
         ModelAndView modelAndView = new ModelAndView("login.html");
         modelAndView.addObject("title", "Darmijo");
         return modelAndView ;
-    }
-    
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Login Page");
-        return "login.html";
     }
     
     @PostMapping("/login")
@@ -44,19 +38,28 @@ public class AccessController {
         @RequestParam String password
     ) throws AuthorityException {
         log.info("Authenticating user: {}", email);
-        User user = userService.authenticateUser(email, password);
+        User user = userService.authenticateUser(email, password); // o
         log.info("User authenticated: {}", user);
         String token = jwtService.createWithSubject(user.getEmail());
-        Cookie cookie = new Cookie("token", token);
+        Cookie cookie = new Cookie("Authorization", token);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60 * 24);
         response.addCookie(cookie);
-        return "redirect:/app/dashboard";
+        log.info("token created: {}", token);
+        return "redirect:/recipes";
     }
     
     @GetMapping("/logout")
-    public String logout() {
-        return "logout.html";
+    public String logout(
+        HttpServletResponse response
+    ) {
+        log.info("Logging out");
+        Cookie cookie = new Cookie("Authorization", "null");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "dashboard.html";
     }
 }

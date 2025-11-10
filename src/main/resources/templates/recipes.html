@@ -6,9 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<script th:inline="javascript">
-
-</script>
 <body class="bg-gray-100">
 <div class="content-fluid" style="min-height: 100vh">
     <div class="container mx-auto px-4 py-4">
@@ -19,13 +16,15 @@
                         Grupo 4
                     </a>
                 </li>
+
+                <li th:text="'Wena '+ ${user.displayName} + '!'">
+                </li>
+
+
             </ul>
 
         </div>
-        <a class="btn btn-success my-4" th:href="@{/login}">Log In</a>
-        <div class="flex justify-center my-4">
-        <input type="text" placeholder="Buscar receta..." class="input input-bordered"/>
-        </div>
+        <a class="btn btn-success" th:href="@{/logout}">Cerrar Sesión</a>
         <div class="flex justify-center gap-4">
             <div class="card card-sm bg-base-200 max-w-60 shadow" th:each="recipe : ${recipes}">
                 <figure>
@@ -33,6 +32,9 @@
                 </figure>
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4" th:text="${recipe.title}"></h3>
+                    <div class="card-actions justify-end">
+                        <a class="btn btn-primary" th:href="@{/recipe/{ulid}(ulid=${recipe.ulid})}">Ver Receta</a>
+                    </div>
                 </div>
 
             </div>

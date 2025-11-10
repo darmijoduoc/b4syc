@@ -72,6 +72,14 @@ public class UserService {
         return passwordEncoder.encode(password);
     }
     
+    public User getUserByEmail(String email) throws ResourceNotFoundException {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if(optionalUser.isEmpty()) {
+            throw new ResourceNotFoundException("User not found");
+        }
+        return optionalUser.get();
+    }
+    
     public User authenticateUser(String email, String password) throws AuthorityException {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if(optionalUser.isEmpty()) {

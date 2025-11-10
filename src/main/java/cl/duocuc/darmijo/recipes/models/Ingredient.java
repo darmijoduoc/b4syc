@@ -21,4 +21,8 @@ public class Ingredient {
     public String getUnit() {
         return unit;
     }
+    
+    public String toString() {
+        return amount + " " + unit + " de " + name;
+    }
 }

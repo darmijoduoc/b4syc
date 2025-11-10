@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100">
+<div class="content-fluid" style="min-height: 100vh">
+    <div class="container mx-auto px-4 py-4">
+        <div class="breadcrumbs text-sm">
+            <ul>
+                <li>
+                    <a class="nav-link active " aria-current="page" href="${pageContext.request.contextPath}/#">
+                        Grupo 4
+                    </a>
+                </li>
+
+                <li th:text="${recipe.title}">
+                </li>
+
+
+            </ul>
+
+        </div>
+        <div class="carousel rounded-box h-64">
+            <div class="carousel-item" th:each="image : ${recipe.images}">
+                <img th:src="@{${image.url}}" th:alt="${image.description}"/>
+            </div>
+        </div>
+        <diV class="card rounded-box h-64">
+            <div class="card-body">
+                <h2 class="card-title" th:text="${recipe.title}"></h2>
+                <p th:text="${recipe.description}"></p>
+                <h3>Ingredientes</h3>
+                <ul>
+                    <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+                </ul>
+                <h3>Preparación</h3>
+                <ol>
+                    <li th:each="step : ${recipe.steps}" th:text="${step}"></li>
+                </ol>
+                <div class="card-actions justify-end">
+                    <a class="btn btn-primary" th:href="@{/recipes}">Volver a Recetas</a>
+                </div>
+            </div>
+        </diV>
+
+
+    </div>
+</div>
+</body>
