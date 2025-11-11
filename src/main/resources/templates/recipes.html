@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-white min-h-screen flex flex-col">
 <nav class="navbar shadow-md px-6 text-white" style="background-color:#10935a;">
     <div class="flex justify-between items-center w-full">
          <div class="breadcrumbs text-sm">
@@ -32,7 +32,7 @@
       style="font-size: 3rem; color: #10935a;">Recetas disponibles</h1>
 
   <div class="flex flex-wrap justify-center gap-10 max-w-7xl mx-auto">
-    <div class="card w-80 bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300"
+    <div class="card w-80 bg-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300"
          th:each="recipe : ${recipes}">
       <figure class="h-48 overflow-hidden rounded-t-lg">
         <img class="object-cover w-full h-full transition-transform duration-500 hover:scale-105"

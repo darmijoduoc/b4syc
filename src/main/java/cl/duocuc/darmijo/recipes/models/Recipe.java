@@ -16,14 +16,19 @@ public class Recipe {
     private final List<Ingredient> ingredients;
     private final List<String> steps;
     private final List<Image> images;
+    private final String duration; // hh:mm
+    private final String origin; // country or region
     
-    public Recipe(String title, String description, List<Ingredient> ingredients, List<String> steps, List<Image> images) {
+    
+    public Recipe(String title, String description, List<Ingredient> ingredients, List<String> steps, List<Image> images, String duration, String origin) {
         this.ulid = UlidCreator.getUlid().toString();
         this.title = title;
         this.description = description;
         this.ingredients = ingredients;
         this.steps = steps;
         this.images = images;
+        this.duration = duration;
+        this.origin = origin;
     }
     
     public Recipe(String title, String description) {
@@ -33,6 +38,8 @@ public class Recipe {
         this.ingredients = new ArrayList<>();
         this.steps = new ArrayList<>();;
         this.images = new ArrayList<>();;
+        this.duration = "";
+        this.origin = "";
     }
     
     public String getUlid() {
@@ -71,5 +78,11 @@ public class Recipe {
         this.images.add(image);
     }
     
+    public String getDuration() {
+        return duration;
+    }
     
+    public String getOrigin() {
+        return origin;
+    }
 }

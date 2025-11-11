@@ -5,6 +5,9 @@ import cl.duocuc.darmijo.core.exceptions.ResourceNotFoundException;
 import cl.duocuc.darmijo.users.models.User;
 import cl.duocuc.darmijo.users.repository.UserRepository;
 import com.github.f4b6a3.ulid.UlidCreator;
+import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     
     private final UserRepository userRepository;
-    
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
     
     public Optional<User> createUser(String email, String displayName, String roles, String password) {
         String ulid = UlidCreator.getUlid().toString();

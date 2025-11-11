@@ -3,10 +3,7 @@ package cl.duocuc.darmijo.users.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.f4b6a3.ulid.Ulid;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.experimental.FieldDefaults;
 
 @Data
 @Entity

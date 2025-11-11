@@ -8,7 +8,6 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,7 @@ public class AccessController {
     private JwtService jwtService;
     
     
+    
     @GetMapping("/login")
     public ModelAndView login(Model model) {
         ModelAndView modelAndView = new ModelAndView("login.html");
@@ -32,7 +32,7 @@ public class AccessController {
     }
     
     @PostMapping("/login")
-    public String postLogin(
+    public String login(
         HttpServletResponse response,
         @RequestParam String email,
         @RequestParam String password

@@ -47,19 +47,16 @@ public class AppController {
         @CookieValue(name="Authorization", required = false) String token,
         Model model
     ) {
-        if(token == null) {
-            return new ModelAndView("redirect:/login?no_session");
-        }
-        log.info("get dashboard {}", token);
+        if(token == null) return new ModelAndView("redirect:/login?no_session");
         try {
             Claims claims = jwtService.verifyAndGetClaims(token);
             String email = claims.getSubject();
             User user = userService.getUserByEmail(email);
             List<Recipe> recipes = recipeService.getAllRecipes();
-            String city = (String) claims.get("city");
             return new ModelAndView("recipes")
                 .addObject("recipes", recipes)
                 .addObject("user", user);
+            
         } catch (Exception e) {
             //return accessController.logout();
             return new ModelAndView("redirect:/login");
@@ -70,10 +67,10 @@ public class AppController {
     
     @GetMapping("recipe/{ulid}")
     public ModelAndView getRecipe(
-        @CookieValue(name="Authorization") String token,
+        @CookieValue(name="Authorization", required = false) String token,
         @PathVariable(name="ulid") String ulid
     ) throws ResourceNotFoundException {
-        log.info("get dashboard {}", token);
+        if(token == null) return new ModelAndView("redirect:/login?no_session");
         Claims claims = jwtService.verifyAndGetClaims(token);
         Optional<Recipe> recipe = recipeService.getRecipeById(ulid);
         if(recipe.isEmpty()) throw new ResourceNotFoundException("Recipe not found");

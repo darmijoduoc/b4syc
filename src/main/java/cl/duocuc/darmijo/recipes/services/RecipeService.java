@@ -41,7 +41,8 @@ public class RecipeService {
                 new Image("/images/spaghetti_03.png", "Cocinando espaguetis a la boloñesa en una sartén."),
                 new Image("/images/spaghetti_04.png", "Presentación final de los espaguetis a la boloñesa."),
                 new Image("/images/spaghetti_05.png", "Primer plano de los espaguetis a la boloñesa con queso parmesano.")
-            )),
+            ),
+                "00:45", "Italia"),
             
             new Recipe("Pollo al Curry", "Un sabroso curry de pollo con especias aromáticas.", List.of(
                 new Ingredient("Pollo", 500, "gramos"),
@@ -66,8 +67,8 @@ public class RecipeService {
                 new Image("/images/chicken_curry_03.png", "Cocinando pollo al curry en una olla."),
                 new Image("/images/chicken_curry_04.png", "Presentación final del pollo al curry."),
                 new Image("/images/chicken_curry_05.png", "Primer plano del pollo al curry con arroz.")
-            )),
-            
+            ),
+                "00:40", "India"),
             new Recipe("Pizza Margarita", "Una pizza simple y clásica con tomates frescos, mozzarella y albahaca.", List.of(
                 new Ingredient("Masa para pizza", 1, "base"),
                 new Ingredient("Salsa de tomate", 150, "ml"),
@@ -86,7 +87,8 @@ public class RecipeService {
                 new Image("/images/pizza_margherita_01.png", "Una pizza Margarita recién horneada."),
                 new Image("/images/pizza_margherita_02.png", "Ingredientes para la pizza Margarita."),
                 new Image("/images/pizza_margherita_03.png", "Preparación de la pizza Margarita.")
-            ))
+            ),
+                "00:30", "Italia")
         );
     }
     

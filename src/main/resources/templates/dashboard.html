@@ -24,7 +24,7 @@
       <div class="mt-4 flex justify-center">
         <input
           type="text"
-          placeholder="Buscar receta..."
+          placeholder="Buscar receta, origen, o ingrediente..."
           class="input input-bordered w-full sm:w-1/2"
           name="q"
           id="q"/>
@@ -40,6 +40,10 @@
             </figure>
             <div class="card-body p-4">
               <h3 class="card-title text-base justify-center text-center" th:text="${recipe.title}">Título</h3>
+                <p class="origin text-neutral" style="opacity: 0.5" th:text="${recipe.origin}"></p>
+                <ul style="display: none">
+                    <li class="ingredient" th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient.name}"></li>
+                </ul>
             </div>
           </div>
         </div>
@@ -60,7 +64,11 @@
       const term = input.value.toLowerCase();
       cards.forEach(card => {
         const title = card.querySelector(".card-title").textContent.toLowerCase();
-        card.style.display = title.includes(term) ? "block" : "none";
+        const origin = card.querySelector(".origin").textContent.toLowerCase();
+        const ingredients = Array.from(card.querySelectorAll(".ingredient")).map(li => li.textContent.toLowerCase());
+        const ingredientMatch = ingredients.some(ingredient => ingredient.includes(term));
+        const show = title.includes(term) || origin.includes(term) || ingredientMatch;
+        card.style.display = show ? "block" : "none";
       });
     });
   });
