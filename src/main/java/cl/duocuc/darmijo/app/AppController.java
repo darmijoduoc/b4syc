@@ -8,13 +8,12 @@ import cl.duocuc.darmijo.users.service.JwtService;
 import cl.duocuc.darmijo.users.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class AppController {
     
     @GetMapping("recipes")
     public ModelAndView getDashboard(
-        @CookieValue(name="Authorization", required = false) String token,
+        @CookieValue(name="Authorization", required = true) String token,
         Model model
     ) {
         if(token == null) return new ModelAndView("redirect:/login?no_session");
@@ -67,14 +66,55 @@ public class AppController {
     
     @GetMapping("recipe/{ulid}")
     public ModelAndView getRecipe(
-        @CookieValue(name="Authorization", required = false) String token,
+        HttpServletRequest request,
+        @CookieValue(name="Authorization", required = true) String token,
+        @PathVariable(name="ulid") String ulid,
+        HttpServletResponse httpServletResponse) throws ResourceNotFoundException {
+        if(token == null) return new ModelAndView("redirect:/login?no_session");
+        Claims claims = jwtService.verifyAndGetClaims(token);
+        Optional<Recipe> recipe = recipeService.getRecipeByUlid(ulid);
+        if(recipe.isEmpty()) {
+            return new ModelAndView("redirect:/recipes");
+        }
+        
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String baseUrl = scheme + "://" + serverName + ((serverPort == 80 || serverPort == 443) ? "" : ":" + serverPort);
+        
+        return new ModelAndView("recipe")
+            .addObject("recipe", recipe.get())
+            .addObject("jwt", jwtService.createWithSubject("readonly"))
+            .addObject("baseUrl", baseUrl);
+
+    }
+    
+    @PostMapping("recipe/{ulid}/comments")
+    public ModelAndView postComment(
+        HttpServletRequest request,
+        @CookieValue(name="Authorization", required = true) String token,
+        @PathVariable(name="ulid") String ulid,
+        @RequestParam("comment") String comment,
+        @RequestParam("rating") int rating,
+        HttpServletResponse httpServletResponse) throws ResourceNotFoundException {
+        if(token == null) return new ModelAndView("redirect:/login?no_session");
+        Claims claims = jwtService.verifyAndGetClaims(token);
+        User user = userService.getUserByEmail(claims.getSubject());
+        recipeService.commentRecipe(ulid, user.getDisplayName(), comment, rating);
+        
+        return new ModelAndView("redirect:/recipe/" + ulid);
+    }
+    
+    @GetMapping("shared_recipe/{ulid}")
+    public ModelAndView getSharedRecipe(
+        @RequestParam(name="jwt", required = true) String token,
         @PathVariable(name="ulid") String ulid
     ) throws ResourceNotFoundException {
         if(token == null) return new ModelAndView("redirect:/login?no_session");
-        Claims claims = jwtService.verifyAndGetClaims(token);
-        Optional<Recipe> recipe = recipeService.getRecipeById(ulid);
+        jwtService.verifyAndGetClaims(token);
+        Optional<Recipe> recipe = recipeService.getRecipeByUlid(ulid);
         if(recipe.isEmpty()) throw new ResourceNotFoundException("Recipe not found");
-        return new ModelAndView("recipe")
+        return new ModelAndView("shared_recipe")
             .addObject("recipe", recipe.get());
     }
     

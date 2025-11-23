@@ -5,14 +5,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "exp2_image")
-public class Image {
+@Table(name = "exp2_step")
+public class Step {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     @Column(unique = true)
     private String ulid;
     private int recipeId;
-    private String url;
     private String description;
 }

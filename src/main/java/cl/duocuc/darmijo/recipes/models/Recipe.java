@@ -5,84 +5,71 @@ import com.github.f4b6a3.ulid.Ulid;
 import com.github.f4b6a3.ulid.UlidCreator;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Comments;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@Entity
+@Table(name = "exp2_recipe")
 public class Recipe {
-    private final String ulid;
-    private final String title;
-    private final String description;
-    private final List<Ingredient> ingredients;
-    private final List<String> steps;
-    private final List<Image> images;
-    private final String duration; // hh:mm
-    private final String origin; // country or region
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(unique = true)
+    private String ulid;
+    @Column(unique = true)
+    private String title;
+    private String description;
+    @Transient
+    private List<Ingredient> ingredients;
+    @Transient
+    private List<Step> steps;
+    @Transient
+    private List<Image> images;
+    @Transient
+    private List<Comment> comments;
+    private String duration; // hh:mm
+    private String origin; // country or region
     
     
-    public Recipe(String title, String description, List<Ingredient> ingredients, List<String> steps, List<Image> images, String duration, String origin) {
-        this.ulid = UlidCreator.getUlid().toString();
-        this.title = title;
-        this.description = description;
-        this.ingredients = ingredients;
-        this.steps = steps;
-        this.images = images;
-        this.duration = duration;
-        this.origin = origin;
-    }
-    
-    public Recipe(String title, String description) {
-        this.ulid = UlidCreator.getUlid().toString();
-        this.title = title;
-        this.description = description;
-        this.ingredients = new ArrayList<>();
-        this.steps = new ArrayList<>();;
-        this.images = new ArrayList<>();;
-        this.duration = "";
-        this.origin = "";
-    }
-    
-    public String getUlid() {
-        return ulid;
-    }
-    
-    public String getTitle() {
-        return title;
-    }
-    
-    public String getDescription() {
-        return description;
-    }
-    
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-    
-    public List<String> getSteps() {
-        return steps;
-    }
-    
-    public List<Image> getImages() {
-        return images;
-    }
     
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
+    public void addIngredients(List<Ingredient> ingredients) {
+        this.ingredients.addAll(ingredients);
+    }
     
-    public void addStep(String step) {
+    public void addStep(Step step) {
         this.steps.add(step);
+    }
+    public void addSteps(List<Step> steps) {
+        this.steps.addAll(steps);
     }
     
     public void addImage(Image image) {
         this.images.add(image);
     }
-    
-    public String getDuration() {
-        return duration;
+    public void addImages(List<Image> images) {
+        this.images.addAll(images);
     }
     
-    public String getOrigin() {
-        return origin;
+    public void addComments(List<Comment> comments) {
+        this.comments.addAll(comments);
     }
+    
+    public long getCreatedAt() {
+        return Ulid.from(ulid).getTime();
+    }
+    
+    public double getRating() {
+        if(this.comments == null || this.comments.size() == 0) return 0.0;
+        double total = comments.stream().mapToDouble(Comment::getRating).sum();
+        return BigDecimal.valueOf(total / this.comments.size()).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue();
+    }
+ 
 }
