@@ -1,5 +1,6 @@
 package cl.duocuc.darmijo.users.models;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Entity
 public class CreateUserParams {
     @NotBlank
     @Email(message = "El email no tiene un formato válido")
