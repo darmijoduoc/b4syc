@@ -10,7 +10,7 @@
 <div class="content-fluid" style="min-height: 100vh">
     <div class="container mx-auto px-4 py-4">
 
-            <main class="flex-grow container mx-auto px-4 py-10">
+        <main class="flex-grow container mx-auto px-4 py-10">
             <div class="card bg-base-100 shadow-xl max-w-3xl mx-auto">
                 <div class="carousel rounded-box h-64">
                     <div class="carousel-item" th:each="image : ${recipe.images}">
@@ -18,9 +18,35 @@
                     </div>
                 </div>
 
+
                 <div class="card-body pt-0">
                     <h1 class="text-2xl font-bold text-gray-800" th:text="${recipe.title}"></h1>
                     <p class="text-gray-600" th:text="${recipe.description}"></p>
+                    <p class="text-gray-600" th:text="${recipe.rating}"></p>
+                    <div class="rating">
+                        <input type="radio" value="1"
+                               class="mask mask-star-2" aria-label="1 star"
+                               th:classappend="${recipe.rating} >= 1 ? ' bg-orange-400' : ' bg-gray-300'"
+                               th:checked="${recipe.rating} == 1" disabled/>
+                        <input type="radio" value="2"
+                               class="mask mask-star-2" aria-label="2 star"
+                               th:classappend="${recipe.rating} >= 2 ? ' bg-orange-400' : ' bg-gray-300'"
+                               th:checked="${recipe.rating} == 2" disabled/>
+                        <input type="radio" value="3"
+                               class="mask mask-star-2" aria-label="3 star"
+                               th:classappend="${recipe.rating} >= 3 ? ' bg-orange-400' : ' bg-gray-300'"
+                               th:checked="${recipe.rating} == 3" disabled/>
+                        <input type="radio" value="4"
+                               class="mask mask-star-2" aria-label="4 star"
+                               th:classappend="${recipe.rating} >= 4 ? ' bg-orange-400' : ' bg-gray-300'"
+                               th:checked="${recipe.rating} == 4" disabled/>
+                        <input type="radio" value="5"
+                               class="mask mask-star-2" aria-label="5 star"
+                               th:classappend="${recipe.rating} >= 5 ? ' bg-orange-400' : ' bg-gray-300'"
+                               th:checked="${recipe.rating} == 5" disabled/>
+
+                    </div>
+
 
                     <h2 class="font-bold text-lg text-gray-700 mt-6">Ingredientes</h2>
                     <ul class="divide-y divide-[color:#7a2f25]">
@@ -51,9 +77,32 @@
                                 <div th:text="${comment.formattedCreatedAt}"></div>
                             </div>
                             <p class="list-col-wrap text-xs" th:text="${comment.text}"></p>
+                            <div class="rating">
+                                <input type="radio" value="1"
+                                       class="mask mask-star-2" aria-label="1 star"
+                                       th:classappend="${comment.rating} >= 1 ? ' bg-orange-400' : ' bg-gray-300'"
+                                       th:checked="${comment.rating} == 1" disabled/>
+                                <input type="radio" value="2"
+                                       class="mask mask-star-2" aria-label="2 star"
+                                       th:classappend="${comment.rating} >= 2 ? ' bg-orange-400' : ' bg-gray-300'"
+                                       th:checked="${comment.rating} == 2" disabled/>
+                                <input type="radio" value="3"
+                                       class="mask mask-star-2" aria-label="3 star"
+                                       th:classappend="${comment.rating} >= 3 ? ' bg-orange-400' : ' bg-gray-300'"
+                                       th:checked="${comment.rating} == 3" disabled/>
+                                <input type="radio" value="4"
+                                       class="mask mask-star-2" aria-label="4 star"
+                                       th:classappend="${comment.rating} >= 4 ? ' bg-orange-400' : ' bg-gray-300'"
+                                       th:checked="${comment.rating} == 4" disabled/>
+                                <input type="radio" value="5"
+                                       class="mask mask-star-2" aria-label="5 star"
+                                       th:classappend="${comment.rating} >= 5 ? ' bg-orange-400' : ' bg-gray-300'"
+                                       th:checked="${comment.rating} == 5" disabled/>
+                            </div>
 
                         </li>
                     </ul>
+
                 </div>
             </div>
         </main>

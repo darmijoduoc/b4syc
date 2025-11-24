@@ -1,5 +1,6 @@
 package cl.duocuc.darmijo.app;
 
+import cl.duocuc.darmijo.core.exceptions.AuthorityException;
 import cl.duocuc.darmijo.core.exceptions.ResourceNotFoundException;
 import cl.duocuc.darmijo.recipes.models.Recipe;
 import cl.duocuc.darmijo.recipes.services.RecipeService;
@@ -35,10 +36,26 @@ public class AppController {
     AccessController accessController;
     
     @GetMapping
-    public ModelAndView getHome() {
+    public ModelAndView getHome(
+        @CookieValue(name="Authorization", required = false) String token
+    ) {
         List<Recipe> recipes = recipeService.getAllRecipes();
-        return new ModelAndView("dashboard")
-            .addObject("recipes", recipes);
+        try {
+            Claims claims = jwtService.verifyAndGetClaims(token);
+            String email = claims.getSubject();
+            User user = userService.getUserByEmail(email);
+            
+            return new ModelAndView("recipes")
+                .addObject("recipes", recipes)
+                .addObject("user", user);
+            
+        } catch (Exception e) {
+            //return accessController.logout();
+            return new ModelAndView("dashboard")
+                .addObject("recipes", recipes);
+        }
+        
+        
     }
     
     @GetMapping("recipes")
@@ -107,11 +124,15 @@ public class AppController {
     
     @GetMapping("shared_recipe/{ulid}")
     public ModelAndView getSharedRecipe(
-        @RequestParam(name="jwt", required = true) String token,
+        @RequestParam(name="jwt", required = false) String token,
         @PathVariable(name="ulid") String ulid
-    ) throws ResourceNotFoundException {
-        if(token == null) return new ModelAndView("redirect:/login?no_session");
-        jwtService.verifyAndGetClaims(token);
+    ) throws ResourceNotFoundException, AuthorityException {
+        if(token == null) throw new AuthorityException("No token provided");
+        try {
+            jwtService.verifyAndGetClaims(token);
+        } catch (Exception e) {
+            throw new AuthorityException("Invalid token");
+        }
         Optional<Recipe> recipe = recipeService.getRecipeByUlid(ulid);
         if(recipe.isEmpty()) throw new ResourceNotFoundException("Recipe not found");
         return new ModelAndView("shared_recipe")

@@ -12,6 +12,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,12 @@ public class UsersController {
     @Resource
     private JwtService jwtService;
     
+    @Value("${app.default.password}")
+    private String password;
+    
     @PostConstruct
     public void init() {
-        String password = "p4ssw0rD!";
+        //String password = "p4ssw0rD!";
         List.of(
             new CreateUserParams("jp@localhost", "Juan Perez", password),
             new CreateUserParams("da@localhost", "Diego Armijo", password),

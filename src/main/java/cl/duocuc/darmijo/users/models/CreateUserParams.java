@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Entity
 public class CreateUserParams {
     @NotBlank
     @Email(message = "El email no tiene un formato válido")

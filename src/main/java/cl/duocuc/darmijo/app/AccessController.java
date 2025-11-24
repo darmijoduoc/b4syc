@@ -43,6 +43,7 @@ public class AccessController {
         String token = jwtService.createWithSubject(user.getEmail());
         Cookie cookie = new Cookie("Authorization", token);
         cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60 * 24);
         response.addCookie(cookie);
@@ -59,6 +60,7 @@ public class AccessController {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(0);
+        cookie.setSecure(true);
         response.addCookie(cookie);
         return new ModelAndView("redirect:/");
     }

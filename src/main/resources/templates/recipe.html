@@ -15,7 +15,7 @@
                 <div class="breadcrumbs text-sm">
                     <ul>
                         <li>
-                            <a class="text-white hover:underline" href="${pageContext.request.contextPath}/#">Grupo
+                            <a class="text-white hover:underline" href="/">Grupo
                                 4</a>
                         </li>
                         <li th:text="${recipe.title}"></li>
@@ -40,28 +40,23 @@
                         <input type="radio" value="1"
                                class="mask mask-star-2" aria-label="1 star"
                                th:classappend="${recipe.rating} >= 1 ? ' bg-orange-400' : ' bg-gray-300'"
-                               name="rating-recipe"
-                               th:checked="${recipe.rating} == 1"/>
+                               th:checked="${recipe.rating} == 1" disabled/>
                         <input type="radio" value="2"
                                class="mask mask-star-2" aria-label="2 star"
                                th:classappend="${recipe.rating} >= 2 ? ' bg-orange-400' : ' bg-gray-300'"
-                               name="rating-recipe"
-                               th:checked="${recipe.rating} == 2"/>
+                               th:checked="${recipe.rating} == 2" disabled/>
                         <input type="radio" value="3"
                                class="mask mask-star-2" aria-label="3 star"
                                th:classappend="${recipe.rating} >= 3 ? ' bg-orange-400' : ' bg-gray-300'"
-                               name="rating-recipe"
-                               th:checked="${recipe.rating} == 3"/>
+                               th:checked="${recipe.rating} == 3" disabled/>
                         <input type="radio" value="4"
                                class="mask mask-star-2" aria-label="4 star"
                                th:classappend="${recipe.rating} >= 4 ? ' bg-orange-400' : ' bg-gray-300'"
-                               name="rating-recipe"
-                               th:checked="${recipe.rating} == 4"/>
+                               th:checked="${recipe.rating} == 4" disabled/>
                         <input type="radio" value="5"
                                class="mask mask-star-2" aria-label="5 star"
                                th:classappend="${recipe.rating} >= 5 ? ' bg-orange-400' : ' bg-gray-300'"
-                               name="rating-recipe"
-                               th:checked="${recipe.rating} == 5"/>
+                               th:checked="${recipe.rating} == 5" disabled/>
 
                     </div>
 
