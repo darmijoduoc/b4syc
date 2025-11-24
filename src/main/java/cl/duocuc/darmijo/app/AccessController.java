@@ -37,8 +37,7 @@ public class AccessController {
         @RequestParam String email,
         @RequestParam String password
     ) throws AuthorityException {
-        log.info("Authenticating user: {}", email);
-        User user = userService.authenticateUser(email.translateEscapes(), password.translateEscapes()); // o
+        User user = userService.authenticateUser(email.translateEscapes(), password.translateEscapes());
         log.info("User authenticated: {}", user);
         String token = jwtService.createWithSubject(user.getEmail());
         Cookie cookie = new Cookie("Authorization", token);

@@ -34,7 +34,6 @@ public class UsersController {
     
     @PostConstruct
     public void init() {
-        //String password = "p4ssw0rD!";
         List.of(
             new CreateUserParams("jp@localhost", "Juan Perez", password),
             new CreateUserParams("da@localhost", "Diego Armijo", password),
